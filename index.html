@@ -6,15 +6,14 @@
 <title>PO-33 K.O! Emulator</title>
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Orbitron:wght@700,900&family=Rajdhani:wght@600,700&display=swap" rel="stylesheet">
 <style>
-
 :root {
-  --orange: #ff4400;
-  --amber: #ffaa00;
-  --green: #88cc00;
-  --lcd-bg: #0e1a05;
-  --lcd-fg: #9fd800;
-  --btn: #252525;
-  --btn-border: #383838;
+  --orange: #ff6600;
+  --amber: #ffcc00;
+  --green: #aaff00;
+  --lcd-bg: #0a1505;
+  --lcd-fg: #bfff00;
+  --btn: #2a2a2a;
+  --btn-border: #505050;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -55,10 +54,9 @@ body {
   background-size: 28px 28px;
   pointer-events: none;
 }
-.hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.te { font-family: 'Orbitron', monospace; font-size: 8px; letter-spacing: 3px; color: #333; text-transform: uppercase; }
+.te { font-family: 'Orbitron', monospace; font-size: 8px; letter-spacing: 3px; color: #555; text-transform: uppercase; }
 .model-name { font-family: 'Orbitron', monospace; font-size: 16px; font-weight: 900; color: var(--orange); letter-spacing: 3px; text-shadow: 0 0 20px rgba(255,68,0,0.4); }
-.subtitle { font-size: 9px; letter-spacing: 2px; color: #3a3a3a; text-transform: uppercase; text-align: right; }
+.subtitle { font-size: 9px; letter-spacing: 2px; color: #555; text-transform: uppercase; text-align: right; }
 .lcd {
   background: var(--lcd-bg);
   border-radius: 6px;
@@ -83,22 +81,22 @@ body {
 .t-btn {
   flex: 1; padding: 6px 3px;
   background: var(--btn); border: 1px solid var(--btn-border); border-radius: 4px;
-  color: #555; font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700;
+  color: #888; font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.08s;
   -webkit-tap-highlight-color: transparent;
 }
-.t-btn:hover { color: #777; border-color: #444; }
-.t-btn.active { background: rgba(255,170,0,0.12); border-color: var(--amber); color: var(--amber); }
+.t-btn:hover { color: #aaa; border-color: #666; }
+.t-btn.active { background: rgba(255,204,0,0.15); border-color: var(--amber); color: var(--amber); }
 .sec-div { display: flex; margin-bottom: 5px; border-bottom: 1px solid #222; }
 .sec-lbl { flex: 1; text-align: center; font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding-bottom: 3px; }
-.sec-lbl.mel { color: #446688; }
-.sec-lbl.drm { color: #883322; }
+.sec-lbl.mel { color: #6699cc; }
+.sec-lbl.drm { color: #cc4433; }
 .fx-bar {
   background: #111; border: 1px solid #222; border-radius: 4px;
   padding: 4px 10px; margin-bottom: 8px; display: flex;
   align-items: center; justify-content: space-between; min-height: 28px;
 }
-.fx-label { font-size: 8px; letter-spacing: 2px; color: #333; text-transform: uppercase; }
+.fx-label { font-size: 8px; letter-spacing: 2px; color: #555; text-transform: uppercase; }
 .fx-name { font-family: 'VT323', monospace; font-size: 20px; color: var(--amber); opacity: 0; transition: opacity 0.3s; }
 .fx-name.show { opacity: 1; }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 8px; }
@@ -112,16 +110,16 @@ body {
 .pad[data-pad="5"],.pad[data-pad="6"],.pad[data-pad="7"],.pad[data-pad="8"] { border-color: #2a3848; }
 .pad[data-pad="9"],.pad[data-pad="10"],.pad[data-pad="11"],.pad[data-pad="12"],
 .pad[data-pad="13"],.pad[data-pad="14"],.pad[data-pad="15"],.pad[data-pad="16"] { border-color: #3a2618; }
-.pad-n { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; color: #444; line-height: 1; }
-.pad-sub { font-size: 6.5px; color: #2e2e2e; font-weight: 600; letter-spacing: 0px; margin-top: 1px; text-align: center; line-height: 1; }
+.pad-n { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; color: #666; line-height: 1; }
+.pad-sub { font-size: 6.5px; color: #444; font-weight: 600; letter-spacing: 0px; margin-top: 1px; text-align: center; line-height: 1; }
 .pad-dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 2px; background: transparent; }
-.pad.has-snd .pad-n { color: #888; }
-.pad.has-snd .pad-sub { color: #3a3a3a; }
+.pad.has-snd .pad-n { color: #aaa; }
+.pad.has-snd .pad-sub { color: #555; }
 .pad.has-snd .pad-dot { background: var(--amber); box-shadow: 0 0 4px var(--amber); }
 .pad.in-seq .pad-dot { background: var(--green); box-shadow: 0 0 4px var(--green); }
 .pad.sel .pad-n { color: var(--amber); }
-.pad.sel .pad-sub { color: #664400; }
-.pad.sel { border-color: var(--amber); background: rgba(255,170,0,0.05); }
+.pad.sel .pad-sub { color: #886600; }
+.pad.sel { border-color: var(--amber); background: rgba(255,204,0,0.08); }
 .pad:hover { border-color: #555; }
 .pad.trig { background: rgba(255,68,0,0.22) !important; border-color: var(--orange) !important; box-shadow: 0 0 10px rgba(255,68,0,0.4); }
 .pad.trig .pad-n { color: #fff !important; }
@@ -130,12 +128,12 @@ body {
 .fn-row { display: flex; gap: 5px; margin-bottom: 12px; }
 .fn {
   flex: 1; padding: 8px 3px;
-  background: #1c1c1c; border: 1px solid #2e2e2e; border-radius: 5px;
-  color: #4a4a4a; font-family: 'Rajdhani', sans-serif; font-size: 9px; font-weight: 700;
+  background: #222; border: 1px solid #444; border-radius: 5px;
+  color: #888; font-family: 'Rajdhani', sans-serif; font-size: 9px; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.08s;
   text-align: center; -webkit-tap-highlight-color: transparent;
 }
-.fn:hover { color: #666; border-color: #3a3a3a; }
+.fn:hover { color: #aaa; border-color: #555; }
 .fn.active { background: rgba(255,68,0,0.15); border-color: var(--orange); color: var(--orange); }
 #btn-play.active { background: rgba(0,255,100,0.08); border-color: #00dd66; color: #00dd66; }
 #btn-write.active { background: rgba(255,170,0,0.1); border-color: var(--amber); color: var(--amber); }
@@ -152,25 +150,16 @@ body {
 .knobs-section { padding: 0 4px; }
 .knobs-row { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 8px; }
 .knob-wrap { flex: 1; }
-.knob-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1px; color: #3a3a3a; text-transform: uppercase; text-align: center; margin-bottom: 3px; }
-.knob-sub { font-size: 8px; color: #2a2a2a; display: block; }
-input[type=range] { -webkit-appearance: none; width: 100%; height: 3px; background: #2a2a2a; border-radius: 2px; outline: none; cursor: pointer; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #888, #2a2a2a); border: 1px solid #555; box-shadow: 0 2px 5px rgba(0,0,0,0.6); cursor: pointer; }
-input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #888, #2a2a2a); border: 1px solid #555; cursor: pointer; }
-.footer { margin-top: 8px; text-align: center; font-size: 8px; letter-spacing: 1px; color: #222; text-transform: uppercase; }
-.kbd-hint { font-size: 8px; color: #2a2a2a; text-align: center; letter-spacing: 0.5px; margin-top: 5px; line-height: 1.6; }
+.knob-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1px; color: #555; text-transform: uppercase; text-align: center; margin-bottom: 3px; }
+.knob-sub { font-size: 8px; color: #444; display: block; }
+input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; background: #444; border-radius: 2px; outline: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #999, #3a3a3a); border: 1px solid #666; box-shadow: 0 2px 5px rgba(0,0,0,0.6); cursor: pointer; }
+input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #999, #3a3a3a); border: 1px solid #666; cursor: pointer; }
 </style>
+
 </head>
 <body>
 <div class="device">
-  <div class="hdr">
-    <div>
-      <div class="te">teenage engineering</div>
-      <div class="model-name">PO-33</div>
-    </div>
-    <div class="subtitle">micro sampler<br>K.O!</div>
-  </div>
-
   <div class="lcd">
     <div class="lcd-row1">
       <div class="lcd-bpm" id="lcd-bpm">120<span class="lcd-bpm-unit">bpm</span></div>
@@ -227,12 +216,6 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
       </div>
     </div>
   </div>
-
-  <div class="footer">pocket operator emulator</div>
-  <div class="kbd-hint">
-    1–8: melodic · Q–I: drums · SPACE: play/stop<br>
-    REC: arm mic → tap pad to record, tap pad again to stop
-  </div>
 </div>
 
 <script>
@@ -262,6 +245,8 @@ const state = {
   recState: 'off', recSlot: -1,
   soundMode: false, patternMode: false, bpmMode: false, fxMode: false,
   paramMode: 'tone', currentEffect: 15, step: 0,
+  // Pattern chain: array of pattern indices to play in sequence
+  patternChain: [], chainIndex: 0, chainMode: false,
 };
 const BPM_PRESETS = [80, 120, 140];
 let bpmPresetIdx = 1;
@@ -473,11 +458,12 @@ for (let i = 0; i < 16; i++) {
   d.className = 'sdot'; $('lcd-steps').appendChild(d);
 }
 
+const PAD_KEYS = ['1','2','3','4','Q','W','E','R','A','S','D','F','Z','X','C','V'];
 for (let i = 1; i <= 16; i++) {
   const p = document.createElement('div');
   p.className = 'pad'; p.dataset.pad = i;
   const name = state.soundNames[i-1];
-  p.innerHTML = `<span class="pad-n">${i}</span><span class="pad-sub">${name}</span><span class="pad-dot"></span>`;
+  p.innerHTML = `<span class="pad-n">${PAD_KEYS[i-1]}</span><span class="pad-sub">${name}</span><span class="pad-dot"></span>`;
   $('pad-grid').appendChild(p);
   padEls.push(p);
   p.addEventListener('pointerdown', e => { e.preventDefault(); handlePadDown(i); });
@@ -645,6 +631,11 @@ function seqTick() {
     });
     state.step = curStep;
     curStep = (curStep+1) % STEPS;
+    // Pattern chain: advance to next pattern when step wraps
+    if (curStep === 0 && state.patternChain.length > 0) {
+      state.chainIndex = (state.chainIndex + 1) % state.patternChain.length;
+      state.currentPattern = state.patternChain[state.chainIndex];
+    }
     nextNoteTime += spStep;
   }
   updateDisplay();
@@ -748,8 +739,24 @@ function handlePadDown(padNum) {
   }
 
   if (state.soundMode)   { state.currentSound=idx; flashMsg(`SND ${padNum}: ${state.soundNames[idx]}`); updateDisplay(); return; }
-  if (state.patternMode) { state.currentPattern=idx; flashMsg(`PATTERN ${padNum}`); updateDisplay(); return; }
-  if (state.bpmMode)     { masterGain.gain.value=(idx+1)/16*1.1; flashMsg(`VOLUME ${idx+1}`); updateDisplay(); return; }
+  if (state.patternMode) {
+    if (state.writeMode) {
+      // In WRITE+PATTERN mode: build pattern chain
+      state.patternChain.push(idx);
+      flashMsg(`CHAIN: ${state.patternChain.map(p=>p+1).join('-')}`);
+    } else {
+      state.currentPattern=idx;
+      flashMsg(`PATTERN ${padNum}`);
+    }
+    updateDisplay(); return;
+  }
+  if (state.bpmMode) {
+    // Tap pad to set BPM preset
+    const bpmPresets = [60,80,100,120,140,160,180,200];
+    state.bpm = bpmPresets[idx] || 120;
+    flashMsg(`BPM: ${state.bpm}`);
+    updateDisplay(); return;
+  }
   if (state.fxMode)      { state.currentEffect=idx; flashMsg(FX_NAMES[idx]); updateDisplay(); return; }
 
   if (state.writeMode && !state.playing) {
@@ -774,34 +781,34 @@ function handlePadUp(padNum) {
 }
 
 // ─── Buttons ──────────────────────────────────────────────────────────────────
-// Hold buttons — NO pointerleave (user moves to pads!)
-function holdBtn(id, down, up) {
-  const el = $(id);
-  el.addEventListener('pointerdown', e => { e.preventDefault(); down(); });
-  el.addEventListener('pointerup',   e => { e.preventDefault(); up(); });
+// Sequential mode buttons: press to enter mode, press again (or another mode) to exit
+function clearModes() {
+  state.soundMode = false;
+  state.patternMode = false;
+  state.bpmMode = false;
+  state.fxMode = false;
 }
 
-holdBtn('btn-sound',
-  () => { state.soundMode=true; flashMsg('HOLD + TAP PAD TO SELECT SOUND'); updateDisplay(); },
-  () => { state.soundMode=false; updateDisplay(); }
-);
-holdBtn('btn-pattern',
-  () => { state.patternMode=true; flashMsg('HOLD + TAP PAD TO SELECT PATTERN'); updateDisplay(); },
-  () => { state.patternMode=false; updateDisplay(); }
-);
-holdBtn('btn-bpm',
-  () => { state.bpmMode=true; flashMsg('HOLD+PAD: SET VOLUME'); updateDisplay(); },
-  () => {
-    if (!state.bpmMode) return;
-    state.bpmMode=false;
-    if (padHeld.size===0) {
-      bpmPresetIdx=(bpmPresetIdx+1)%BPM_PRESETS.length;
-      state.bpm=BPM_PRESETS[bpmPresetIdx];
-      flashMsg(`${state.bpm} BPM — ${['HIP HOP','DISCO','TECHNO'][bpmPresetIdx]}`);
-    }
-    updateDisplay();
-  }
-);
+$('btn-sound').addEventListener('pointerdown', e => {
+  e.preventDefault(); ensureAudio();
+  if (state.soundMode) { clearModes(); flashMsg('SOUND MODE OFF'); }
+  else { clearModes(); state.soundMode = true; flashMsg('SOUND: TAP PAD 1-16'); }
+  updateDisplay();
+});
+
+$('btn-pattern').addEventListener('pointerdown', e => {
+  e.preventDefault(); ensureAudio();
+  if (state.patternMode) { clearModes(); flashMsg('PATTERN MODE OFF'); }
+  else { clearModes(); state.patternMode = true; flashMsg('PATTERN: TAP PAD 1-16'); }
+  updateDisplay();
+});
+
+$('btn-bpm').addEventListener('pointerdown', e => {
+  e.preventDefault(); ensureAudio();
+  if (state.bpmMode) { clearModes(); flashMsg('BPM MODE OFF'); }
+  else { clearModes(); state.bpmMode = true; flashMsg('BPM: TURN KNOB A OR TAP PAD'); }
+  updateDisplay();
+});
 
 // REC: press once = arm, press again while armed = cancel, while recording = stop
 $('btn-rec').addEventListener('pointerdown', e => {
@@ -819,24 +826,24 @@ $('btn-rec').addEventListener('pointerdown', e => {
   updateDisplay();
 });
 
-// FX hold to pick effect, release to cycle param mode
+// FX: toggle mode on/off
 $('btn-fx').addEventListener('pointerdown', e => {
   e.preventDefault(); ensureAudio();
-  state.fxMode=true; flashMsg('SELECT EFFECT 1–16'); updateDisplay();
-});
-$('btn-fx').addEventListener('pointerup', e => {
-  e.preventDefault();
-  if (padHeld.size===0) {
-    const m=['tone','filter','trim'];
-    state.paramMode=m[(m.indexOf(state.paramMode)+1)%3];
-    flashMsg(state.paramMode.toUpperCase()+' MODE');
-  }
-  state.fxMode=false; updateDisplay();
+  if (state.fxMode) { clearModes(); flashMsg('FX MODE OFF'); }
+  else { clearModes(); state.fxMode = true; flashMsg('FX: TAP PAD 1-16'); }
+  updateDisplay();
 });
 
 $('btn-write').addEventListener('pointerdown', e => {
   e.preventDefault(); ensureAudio();
   state.writeMode=!state.writeMode;
+  if (!state.writeMode) {
+    // Exiting write mode: clear pattern chain if not playing
+    if (!state.playing) {
+      state.patternChain = [];
+      state.chainIndex = 0;
+    }
+  }
   flashMsg(state.writeMode?'WRITE ON — TAP PADS TO SEQUENCE':'WRITE OFF');
   updateDisplay();
 });
@@ -867,18 +874,29 @@ $('knob-b').addEventListener('input', () => {
 });
 
 // ─── Keyboard ────────────────────────────────────────────────────────────────
-const KM = {'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'q':9,'w':10,'e':11,'r':12,'t':13,'y':14,'u':15,'i':16};
+const KM = {'1':1,'2':2,'3':3,'4':4,'q':5,'w':6,'e':7,'r':8,'a':9,'s':10,'d':11,'f':12,'z':13,'x':14,'c':15,'v':16};
 const keysDown = new Set();
 document.addEventListener('keydown', e => {
   if (e.repeat) return;
-  const pad = KM[e.key];
-  if (pad && !keysDown.has(e.key)) { keysDown.add(e.key); handlePadDown(pad); return; }
-  if (e.key===' ') { e.preventDefault(); if (state.playing) stopPlay(); else startPlay(); }
-  if (e.key==='Escape') { stopPlay(); state.writeMode=false; state.recState='off'; updateDisplay(); }
+  const pad = KM[e.key.toLowerCase()];
+  if (pad && !keysDown.has(e.key.toLowerCase())) { keysDown.add(e.key.toLowerCase()); handlePadDown(pad); return; }
+  if (e.key===' ') { e.preventDefault(); if (state.playing) stopPlay(); else startPlay(); return; }
+  if (e.key==='Escape') { stopPlay(); clearModes(); state.writeMode=false; state.recState='off'; state.patternChain=[]; updateDisplay(); flashMsg('ALL OFF'); return; }
+  // Mode keys (avoiding pad keys: 1-4, Q,W,E,R, A,S,D,F, Z,X,C,V)
+  if (e.key.toLowerCase()==='g') { $('btn-sound').dispatchEvent(new PointerEvent('pointerdown')); return; }
+  if (e.key.toLowerCase()==='p') { $('btn-pattern').dispatchEvent(new PointerEvent('pointerdown')); return; }
+  if (e.key.toLowerCase()==='b') { $('btn-bpm').dispatchEvent(new PointerEvent('pointerdown')); return; }
+  if (e.key.toLowerCase()==='h') { $('btn-fx').dispatchEvent(new PointerEvent('pointerdown')); return; }
+  if (e.key.toLowerCase()==='t') { $('btn-write').dispatchEvent(new PointerEvent('pointerdown')); return; }
+  if (e.key.toLowerCase()==='n') { $('btn-rec').dispatchEvent(new PointerEvent('pointerdown')); return; }
+  // Param tab keys
+  if (e.key.toLowerCase()==='i') { state.paramMode='tone'; flashMsg('TONE MODE'); updateDisplay(); return; }
+  if (e.key.toLowerCase()==='o') { state.paramMode='filter'; flashMsg('FILTER MODE'); updateDisplay(); return; }
+  if (e.key.toLowerCase()==='k') { state.paramMode='trim'; flashMsg('TRIM MODE'); updateDisplay(); return; }
 });
 document.addEventListener('keyup', e => {
-  const pad = KM[e.key];
-  if (pad) { keysDown.delete(e.key); handlePadUp(pad); }
+  const pad = KM[e.key.toLowerCase()];
+  if (pad) { keysDown.delete(e.key.toLowerCase()); handlePadUp(pad); }
 });
 
 // ─── Init ────────────────────────────────────────────────────────────────────
